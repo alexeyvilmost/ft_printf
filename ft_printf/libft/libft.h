@@ -1,0 +1,148 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pallspic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/04 20:42:22 by pallspic          #+#    #+#             */
+/*   Updated: 2019/08/01 16:10:24 by pallspic         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef LIBFT_H
+# define LIBFT_H
+
+# include <stdlib.h>
+# include <unistd.h>
+# include <string.h>
+
+/*
+** ==========================# My definitions #=================================
+*/
+
+# define TRUE 1
+# define FALSE 0
+# define ERROR -1
+
+typedef const char*				t_cchar;
+typedef long long int			t_llong;
+typedef unsigned long int		t_ulong;
+typedef unsigned long long int	t_ullong;
+typedef unsigned short int		t_ushort;
+typedef unsigned int			t_uint;
+typedef unsigned char			t_uchar;
+typedef long double				t_dbl;
+
+/*
+** ==============================# My funcs: #==================================
+**
+** ft_abs - returns absolute value of int
+** ft_pow - raise number (to_raise) to a power (power)
+** ft_itoa_base - base-advanced version of itoa.
+** 					(letter) - is any char in up- or low-case (for a 10+ bases)
+** ft_isspace - returns if character is separator or not
+** ft_isupper - returns if character is in upcase or not
+** ft_islower - returns if character is in lowcase or not
+** ft_strrev - replace input string to a reversed version
+** ft_strnchr - returns the position of first matching symbol
+*/
+
+t_ullong			ft_abs(long long n);
+t_llong				ft_pow(t_llong to_raise, short power);
+long double			ft_pow_dbl(long double to_raise, short power);
+char				*ft_itoa_base(t_ullong num, t_ushort base, char letter);
+
+_Bool				ft_isspace(char c);
+_Bool				ft_isupper(int chr);
+_Bool				ft_islower(int chr);
+
+short				ft_nsize(t_ullong n);
+short				ft_nsize_base(t_ullong n, short base);
+t_ullong			ft_nmult(t_ullong n);
+t_ullong			ft_nmult_base(t_ullong n, short base);
+
+char				*ft_strrev(char *str);
+int					ft_strfchr(const char *str, int to_find);
+char				*ft_strjoinfree(char *s1, t_cchar s2, t_llong amount);
+char				*ft_strerase(t_cchar to_erase, int start_pos, int size);
+
+/*
+** =======================# Standard functions: #===============================
+*/
+
+typedef struct		s_list
+{
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}					t_list;
+
+int					ft_atoi(t_cchar str);
+
+int					ft_isalnum(int ch);
+int					ft_isalpha(int ch);
+int					ft_isascii(int ch);
+int					ft_isdigit(int ch);
+int					ft_isprint(int ch);
+
+char				*ft_itoa(t_llong n);
+
+void				ft_bzero(void *point, size_t size);
+
+int					ft_memcmp(const void *mem1, const void *mem2, size_t size);
+void				*ft_memccpy(void *dst, const void *src, int c, size_t size);
+void				*ft_memalloc(size_t size);
+void				*ft_memcpy(void *dest, const void *src, size_t size);
+void				*ft_memset(void *point, int val, size_t size);
+void				*ft_memchr(const void *arr, int to_find, size_t size);
+void				*ft_memmove(void *dest, const void *src, size_t size);
+void				ft_memdel(void **ap);
+
+void				ft_putnbr(int n);
+void				ft_putchar(char c);
+void				ft_putstr(t_cchar s);
+void				ft_putendl(t_cchar s);
+void				ft_putnbr_fd(int n, int fd);
+void				ft_putchar_fd(char c, int fd);
+void				ft_putstr_fd(t_cchar s, int fd);
+void				ft_putendl_fd(t_cchar s, int fd);
+
+int					ft_strcmp(t_cchar s1, t_cchar s2);
+int					ft_strncmp(t_cchar s1, t_cchar s2, size_t size);
+int					ft_strequ(t_cchar s, t_cchar s2);
+int					ft_strnequ(t_cchar s1, t_cchar s2, size_t n);
+char				*ft_strchr(t_cchar str, int to_find);
+char				*ft_strrchr(t_cchar str, int to_find);
+char				*ft_strcat(char *dest, t_cchar add);
+char				*ft_strncat(char *dest, t_cchar add, size_t size);
+char				*ft_strcpy(char *dest, t_cchar src);
+char				*ft_strncpy(char *dest, t_cchar src, size_t size);
+char				*ft_strmap(t_cchar s, char (*f)(char));
+char				*ft_strmapi(t_cchar s, char (*f)(unsigned int, char));
+char				*ft_strnew(size_t size);
+char				*ft_strstr(t_cchar s1, t_cchar s2);
+char				*ft_strnstr(t_cchar s1, t_cchar s2, size_t size);
+char				*ft_strsub(t_cchar s1, unsigned int start, size_t len);
+char				*ft_strtrim(t_cchar s);
+char				**ft_strsplit(t_cchar s1, char c);
+char				*ft_strdup(t_cchar src);
+char				*ft_strjoin(t_cchar s1, t_cchar s2);
+void				ft_striter(char *s, void (*f)(char *));
+void				ft_striteri(char *s, void (*f)(unsigned int, char *));
+void				ft_strclr(char *s);
+void				ft_strdel(char **as);
+size_t				ft_strlcat(char *dest, t_cchar stc, size_t size);
+size_t				ft_strlen(t_cchar str);
+
+int					ft_toupper(int ch);
+int					ft_tolower(int ch);
+
+void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
+void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
+void				ft_lstadd(t_list **alst, t_list *new);
+void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
+t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+t_list				*ft_lstnew(void const *content, size_t content_size);
+
+#endif
