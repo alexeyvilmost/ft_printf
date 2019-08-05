@@ -29,7 +29,9 @@ NAME = libftprintf.a
 
 SRC = 	utilities.c \
 		put_number.c \
+		put_double.c \
 		ft_printf.c
+
 
 OBJ = $(SRC:.c=.o)
 

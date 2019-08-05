@@ -82,7 +82,7 @@ t_type	pf_put(t_type data, char *n, short size, short neg)
 	if (f)
 		pf_write(O, f - ft_strlen(n), &data.printed);
 	write(1, n, ft_strlen(n));
-	data.printed += ft_strlen(n);
+	 ft_strlen(n);
 	free(n);
 	if (size > 0 && data.flag[0] == '-')
 		pf_write(' ', size, &data.printed);

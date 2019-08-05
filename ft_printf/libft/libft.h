@@ -64,7 +64,8 @@ t_ullong			ft_nmult_base(t_ullong n, short base);
 
 char				*ft_strrev(char *str);
 int					ft_strfchr(const char *str, int to_find);
-char				*ft_strjoinfree(char *s1, t_cchar s2, t_llong amount);
+char				*ft_strjoinfreef(char *s1, t_cchar s2, t_llong amount);
+char				*ft_strjoinfrees(t_cchar s1, char *s2, t_llong amount);
 char				*ft_strerase(t_cchar to_erase, int start_pos, int size);
 
 /*

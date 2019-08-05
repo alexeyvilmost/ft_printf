@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 18:50:22 by pallspic          #+#    #+#             */
-/*   Updated: 2019/07/31 15:23:20 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/05 17:43:55 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 #include <limits.h>
 #include <stdio.h>
 
-# define SECT 1844674407370955200
-# define SHIFT	16383
+# define B23 63
+# define B127 16383
 # define USIGN "uoxXp"
 # define O '0'
 
@@ -31,12 +31,12 @@
 /*
 ** ----------------------+ t_type +--------------------------
 ** %[flag][size][.accur][type][spec]
-** data.flag[0]: '-' or '0'
-** data.flag[1]: '+' or ' '
+** data.flag[0]: '-' or '0' (mutually exclusive)
+** data.flag[1]: '+' or ' ' (mutually exclusive)
 ** data.flag[2]: '#'
-** data.type - 'L' for ll; 'H' for hh;
-** data.line: string that will be displayed
-** data.printed: for each spec - number of displayed characters
+** data.type - 'L' for ll; 'H' for hh; the same char for other
+** data.line: string representation that will be displayed
+** data.printed: number of displayed characters
 ** -----------------------------------------------------------
 */
 
@@ -52,33 +52,35 @@ typedef struct	s_type
 }				t_type;
 
 /*
+** ---------------------+ t_lmath +--------------------------
+*/
+
+typedef struct		s_lmath
+{
+	t_llong			decimal;
+	t_llong			divider;
+	t_llong			dividend;
+}					t_lmath;
+
+
+/*
 ** ----------------------+ t_double +--------------------------
-** struct.part - integer value of double presicion number
-** struct.expo - dynamic divider to handle long math
-** struct.mant - dynamic dividend to handle long math
-** struct.ad - union for working with memory
-** ad.main - the main container of ldouble value
-** ad.mem - represented here \/
+** main - the main container of ldouble value
+** memory - represented here \/
 ** [sign : 1][expo : 15][mant : 64]
 ** -------------------------------------------------------------
 */
 
-typedef	struct			s_double
+typedef	union
 {
-	t_ullong			part;
-	t_ullong			expo;
-	t_ullong			mant;
-	union
+	long double		main;
+	struct
 	{
-		long double		main;
-		struct
-		{
-			t_ulong		mant : 64;
-			t_ushort	expo : 15;
-			_Bool		sign : 1;
-		}				mem;
-	}					ad;
-}						t_double;
+		t_ulong		mant : 63;
+		t_ushort	expo : 15;
+		_Bool		sign : 1;
+	}				memory;
+}					t_double;
 
 /*
 ** =============================# utilities.c #=================================
