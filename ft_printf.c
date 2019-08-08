@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 18:50:08 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/08 15:03:33 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/08 17:01:02 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static t_type	pf_new_list(void)
 	t_type		data;
 
 	data.len = 0;
+	data.add = 0;
 	data.size = 0;
 	data.base = 0;
 	data.accur = -1;

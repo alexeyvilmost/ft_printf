@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 20:51:28 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/08 16:22:26 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/08 20:03:41 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,19 @@ size_t	pf_write(int symbol, size_t amount)
 t_type	pf_pre_put(t_type data, _Bool neg)
 {
 	data.sign = neg;
-	data.len = ft_strlen(data.line);
-	if (data.base == 8 && data.flag[2])
-		data.len += data.base / 8;
-	if (data.base != 8 && data.flag[2])
-		return (pf_put(data, data.len + data.base / 8, 0));
+	if (data.len != 1)
+		data.len = ft_strlen(data.line);
+	data.add += (data.flag[1] || data.sign);
+	if (!ft_strchr("oxXp", data.spec))
+		data.flag[2] = '\0';
+	if (!data.flag[2])
+		return (pf_put(data, data.len, 0));
+	if (data.spec == 'o' && ft_strcmp(data.line, "0"))
+		data.len++;
+	else if (data.spec == 'p')
+		data.add += 2;
+	else if (ft_strcmp(data.line, "0") && data.line[0])
+		data.add += 2;
 	return (pf_put(data, data.len, 0));
 }
 
@@ -50,28 +58,28 @@ t_type	pf_pre_put(t_type data, _Bool neg)
 
 t_type	pf_put(t_type data, t_llong size, short f)
 {
-	f = (size > data.accur || data.accur < 0) ? 0 :
-			(size = data.accur);
-	if ((size = data.size - size) > 0 &&
-			(!data.flag[0] || (data.flag[0] == O && f)))
-		data.printed += pf_write(' ', size - (data.flag[1] || data.sign));
+	f = ((int)data.len > data.accur || data.accur < 0) ? 0 :
+		(size = data.accur);
+	if ((size = data.size - size) > data.add &&
+			(!data.flag[0] || (data.flag[0] == O && data.accur != -1)))
+		data.printed += pf_write(' ', size - data.add);
 	if (data.sign)
 		data.printed += write(1, "-", 1);
 	else if (data.flag[1] && ft_strchr("+ ", data.flag[1]))
-		data.printed += write(1, &data.flag[1], 1 + (size-- * 0));
+		data.printed += write(1, &data.flag[1], 1);
 	if (data.flag[2] == '#' && data.spec == 'o' && ft_strcmp(data.line, "0"))
 		data.printed += write(1, "0", 1);
 	else if (data.spec == 'p')
 		data.printed += write(1, "0x", 2);
 	else if (data.flag[2] == '#' && ft_strcmp(data.line, "0") && data.line[0])
 		data.printed += write(1, data.spec == 'x' ? "0x" : "0X", 2);
-	if (size > 0 && data.flag[0] == O && (data.accur < 0 || data.spec == 'f'))
-		data.printed += pf_write(O, size - data.sign);
+	if (size > data.add && data.flag[0] == O && (data.accur < 0 || data.spec == 'f'))
+		data.printed += pf_write(O, size - data.add);
 	data.printed += (f) ? pf_write(O, f - data.len) : 0;
 	data.printed += write(1, data.line, ft_strlen(data.line));
 	free(data.line);
-	data.printed += (size > 0 && data.flag[0] == '-') ?
-			pf_write(' ', size - data.sign) : 0;
+	data.printed += (size > data.add && data.flag[0] == '-') ?
+			pf_write(' ', size - data.add) : 0;
 	return (data);
 }
 
@@ -88,14 +96,15 @@ t_type	pf_long_math(t_lmath *math, t_double db, t_type data, size_t *i)
 	{
 		math->decimal += math->dividend / math->divider;
 		math->dividend -= ((t_ullong)((t_dbl)math->dividend /
-									  (t_dbl)math->divider) * math->divider);
+					(t_dbl)math->divider) * math->divider);
 	}
+	if (!data.accur && ((t_dbl)math->dividend / (t_dbl)math->divider) > 0.5l)
+		math->decimal++;
 	data.line = ft_strcat(data.line, ft_itoa_base(math->decimal, 10, 'a'));
 	data.len = ft_strlen(data.line);
 	*i = data.len;
-	if (!data.accur)
-		return (pf_pre_put(data, db.memory.sign));
-	data.line[(*i)++] = '.';
+	if (data.accur)
+		data.line[(*i)++] = '.';
 	return (data);
 }
 
@@ -120,9 +129,8 @@ t_type	pf_rounding(t_type data, size_t i, t_double db)
 				data.line = ft_strjoinfrees("1", data.line, -1);
 				return (pf_pre_put(data, db.memory.sign));
 			}
+			else
+				data.line[i]++;
 		}
-	else
-		data.line[--i]++;
-	data.line[i] = '\0';
 	return (pf_pre_put(data, db.memory.sign));
 }

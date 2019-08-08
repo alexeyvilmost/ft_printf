@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 21:02:31 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/08 16:22:26 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/08 19:49:15 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,18 @@ t_type	pf_put_f(t_type data, va_list arg, size_t i, size_t j)
 
 	accur = (data.accur == -1) ? 6 : data.accur;
 	db.main = (data.type == 'L') ? va_arg(arg, long double) :
-			  va_arg(arg, double);
+		va_arg(arg, double);
 	data.line = ft_strnew(ft_nsize(ft_abs((t_llong)db.main)) + accur + 1);
 	data = pf_long_math(&math, db, data, &i);
+	if (!data.accur)
+		return (pf_pre_put(data, db.memory.sign));
 	while (accur-- >= 0)
 	{
 		if (ft_nsize(math.dividend) < 20)
 			math.dividend *= 10;
-		j = 0;
+		else
+			math.divider /= 10;
+		j = 1;
 		while ((t_ullong)math.dividend > math.divider * j)
 			j++;
 		math.dividend -= (j - 1) ? math.divider * (j - 1) : 0;
@@ -66,7 +70,7 @@ t_type	pf_put_f(t_type data, va_list arg, size_t i, size_t j)
 	}
 	i--;
 	if (!(data.line[i] && ft_isdigit(data.line[i]) &&
-		  data.line[i] > '5') && !(data.line[i] = '\0'))
+				data.line[i] > '5') && !(data.line[i] = '\0'))
 		return (pf_pre_put(data, db.memory.sign));
 	data.line[i] = '\0';
 	return (pf_rounding(data, i, db));
@@ -104,7 +108,10 @@ t_type	pf_put_c(t_type data, va_list arg)
 	chr = (data.spec == 'c') ? va_arg(arg, int) : '%';
 	size = (data.size > 1) ? data.size : 1;
 	data.line = ft_strnew(size);
-	ft_memset(data.line, ' ', size);
+	if (data.flag[0] == '0')
+		ft_memset(data.line, '0', size);
+	else
+		ft_memset(data.line, ' ', size);
 	if ((size > 1 && data.flag[0] == '-') || size == 1)
 		data.line[0] = chr;
 	else
