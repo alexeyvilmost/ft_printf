@@ -32,7 +32,7 @@ char	*ft_strjoinfreef(char *s1, t_cchar s2, t_llong amount)
 	return (new);
 }
 
-char	*ft_strjoinfrees(t_cchar s1, char * s2, t_llong amount)
+char	*ft_strjoinfrees(t_cchar s1, char *s2, t_llong amount)
 {
 	char	*new;
 

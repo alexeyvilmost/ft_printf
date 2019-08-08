@@ -17,7 +17,7 @@ char	*ft_itoa(t_llong num)
 	size_t		i;
 	t_ullong	nb;
 	t_ullong	mult;
-	char 		*ret;
+	char		*ret;
 
 	i = 0;
 	ret = ft_strnew(ft_nsize(num));
