@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 20:51:28 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/08 15:04:06 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/08 16:22:26 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,56 @@ t_type	pf_put(t_type data, t_llong size, short f)
 	data.printed += (size > 0 && data.flag[0] == '-') ?
 			pf_write(' ', size - data.sign) : 0;
 	return (data);
+}
+
+t_type	pf_long_math(t_lmath *math, t_double db, t_type data, size_t *i)
+{
+	math->divider = db.memory.expo - B127;
+	math->decimal = (math->divider >= 0) ? ft_pow(2, math->divider) : 0;
+	math->divider = B23 - math->divider;
+	math->dividend = db.memory.mant;
+	while (math->divider > 60 && --math->divider)
+		math->dividend /= 2;
+	math->divider = ft_pow(2, math->divider);
+	if (math->divider && math->dividend > math->divider)
+	{
+		math->decimal += math->dividend / math->divider;
+		math->dividend -= ((t_ullong)((t_dbl)math->dividend /
+									  (t_dbl)math->divider) * math->divider);
+	}
+	data.line = ft_strcat(data.line, ft_itoa_base(math->decimal, 10, 'a'));
+	data.len = ft_strlen(data.line);
+	*i = data.len;
+	if (!data.accur)
+		return (pf_pre_put(data, db.memory.sign));
+	data.line[(*i)++] = '.';
+	return (data);
+}
+
+t_type	pf_rounding(t_type data, size_t i, t_double db)
+{
+	if (ft_strchr(".9", data.line[i - 1]))
+		while (ft_strchr(".9", data.line[--i]) && i != 0)
+		{
+			data.line[i] == '.' ? --i : 0;
+			if (i != 0 && (data.line[i] == '9'))
+			{
+				data.line[i] = '0';
+				if (ft_isdigit(data.line[i - 1]) && data.line[i - 1] != '9')
+				{
+					data.line[i - 1]++;
+					return (pf_pre_put(data, db.memory.sign));
+				}
+			}
+			else if (data.line[i] == '9')
+			{
+				data.line[i] = '0';
+				data.line = ft_strjoinfrees("1", data.line, -1);
+				return (pf_pre_put(data, db.memory.sign));
+			}
+		}
+	else
+		data.line[--i]++;
+	data.line[i] = '\0';
+	return (pf_pre_put(data, db.memory.sign));
 }

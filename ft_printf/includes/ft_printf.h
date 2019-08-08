@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 18:50:22 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/08 15:03:33 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/08 16:23:57 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,10 @@ typedef	union
 }					t_double;
 
 /*
-** =============================# utilities.c #=================================
+** ===============================# other.c #==================================
 */
-
+t_type	pf_long_math(t_lmath *math, t_double db, t_type data, size_t *i);
+t_type	pf_rounding(t_type data, size_t i, t_double db);
 t_type	pf_pre_put(t_type data, _Bool neg);
 t_type	pf_put(t_type data, t_llong size, short f);
 size_t	pf_write(int symbol, size_t amount);
@@ -100,18 +101,13 @@ size_t	pf_write(int symbol, size_t amount);
 int		ft_printf(const char *restrict format, ... );
 
 /*
-** ============================# put_number.c #=================================
+** =================================# put.c #====================================
 */
 
 t_type	pf_put_c(t_type data, va_list arg);
 t_type	pf_put_s(t_type data, va_list arg);
 t_type	pf_put_f(t_type data, va_list arg, size_t i, size_t j);
 t_type	pf_put_n(t_type data, va_list arg, t_llong i, t_ullong n);
-
-/*
-** +++++++++++++++++++++++++++++++# bonus.c #++++++++++++++++++++++++++++++++++++
-*/
-
 void	pf_fill_n(t_type data, va_list arg, int printed);
 
 #endif

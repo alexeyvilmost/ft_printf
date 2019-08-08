@@ -27,10 +27,8 @@ LIB = $(LIB_DIR)/libft.a
 
 NAME = libftprintf.a
 
-SRC = 	utilities.c \
-		put_number.c \
-		put_double.c \
-		bonus.c \
+SRC = 	other.c \
+		put.c \
 		ft_printf.c
 
 
