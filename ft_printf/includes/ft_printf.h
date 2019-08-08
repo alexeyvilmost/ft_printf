@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 18:50:22 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/05 17:43:55 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/08 15:03:33 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ typedef struct	s_type
 	char 		type;
 	char 		spec;
 	char		*line;
+	short 		base;
+	_Bool		sign;
+	size_t		len;
 	size_t 		printed;
 }				t_type;
 
@@ -86,9 +89,9 @@ typedef	union
 ** =============================# utilities.c #=================================
 */
 
-t_type	pf_new_list(void);
-t_type	pf_put(t_type data, char *n, short i, short neg);
-void	pf_write(int symbol, size_t amount, size_t *printed);
+t_type	pf_pre_put(t_type data, _Bool neg);
+t_type	pf_put(t_type data, t_llong size, short f);
+size_t	pf_write(int symbol, size_t amount);
 
 /*
 ** =============================# ft_printf.c #=================================
@@ -101,9 +104,14 @@ int		ft_printf(const char *restrict format, ... );
 */
 
 t_type	pf_put_c(t_type data, va_list arg);
-t_type	pf_put_f(t_type data, va_list arg);
 t_type	pf_put_s(t_type data, va_list arg);
-t_type	pf_put_num(t_type data, va_list arg);
-void	pf_put_n(t_type data, va_list arg, int printed);
+t_type	pf_put_f(t_type data, va_list arg, size_t i, size_t j);
+t_type	pf_put_n(t_type data, va_list arg, t_llong i, t_ullong n);
+
+/*
+** +++++++++++++++++++++++++++++++# bonus.c #++++++++++++++++++++++++++++++++++++
+*/
+
+void	pf_fill_n(t_type data, va_list arg, int printed);
 
 #endif

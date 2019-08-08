@@ -30,6 +30,7 @@ NAME = libftprintf.a
 SRC = 	utilities.c \
 		put_number.c \
 		put_double.c \
+		bonus.c \
 		ft_printf.c
 
 

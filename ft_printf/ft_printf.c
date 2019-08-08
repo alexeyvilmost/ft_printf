@@ -6,11 +6,34 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 18:50:08 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/01 16:10:24 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/08 15:03:33 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** Initializes and clears the contents, returning a fresh element of t_type.
+**
+** Инициализирует и подготавливает содержимое, возвращая 'свежий' элемент t_type
+*/
+
+static t_type	pf_new_list(void)
+{
+	t_type		data;
+
+	data.len = 0;
+	data.size = 0;
+	data.base = 0;
+	data.accur = -1;
+	data.type = '\0';
+	data.spec = '\0';
+	data.printed = 0;
+	data.line = NULL;
+	data.sign = FALSE;
+	ft_memset(data.flag, '\0', 3);
+	return (data);
+}
 
 static size_t	pf_type_parser(t_type data, va_list arg)
 {
@@ -28,19 +51,17 @@ static size_t	pf_type_parser(t_type data, va_list arg)
 	if (data.spec == 's')
 		return (pf_put_s(data, arg).printed);
 	if (ft_strchr("diuoxX", data.spec))
-		return (pf_put_num(data, arg).printed);
+		return (pf_put_n(data, arg, 0, 0).printed);
 	if (data.spec == 'f')
-		return (pf_put_f(data, arg).printed);
+		return (pf_put_f(data, arg, 0, 0).printed);
 	if (data.spec == 'p')
 	{
 		data.type = 'L';
 		data.flag[2] = '#';
-		return (pf_put_num(data, arg).printed);
+		return (pf_put_n(data, arg, 0, 0).printed);
 	}
 	return (0);
 }
-
-// TODO: rewrite fuction to take unsorted params
 
 static t_type	pf_get_params(t_cchar s, size_t *i, t_type data, va_list arg)
 {
@@ -55,23 +76,18 @@ static t_type	pf_get_params(t_cchar s, size_t *i, t_type data, va_list arg)
 	if (s[*i] && s[*i] == '.' && s[++(*i)])
 	{
 		if (ft_isdigit(s[*i]))
-		{
 			data.accur = ft_atoi(&s[*i]);
-			while (s[*i] && ft_isdigit(s[*i]))
-				++(*i);
-		}
 		else if (s[*i] == '*' && ++(*i))
 			data.accur = va_arg(arg, int);
 		else if (s[*i])
 			data.accur = 0;
+		while (s[*i] && ft_isdigit(s[*i]))
+			++(*i);
 	}
 	if (s[*i] && ft_strchr("hlLz", s[*i]))
-	{
-		if (s[*i + 1] && s[*i] == s[*i + 1])
-			data.type = s[(*i)++] - 32 + ((*i)++ * 0);
-		else
-			data.type = s[(*i)++];
-	}
+		data.type = s[(*i)++];
+	if (s[*i] && ft_strchr("hlLz", s[*i]) && (s[*i] == s[*i - 1]))
+		data.type -= 32 + (++(*i) * 0);
 	return (data);
 }
 
@@ -96,17 +112,17 @@ static int		pf_get_spec(const char *s, size_t *i, va_list arg, size_t *pr)
 		return (FALSE);
 	data.spec = s[*i];
 	*pr += pf_type_parser(data, arg);
-	pf_put_n(data, arg, *pr);
+	pf_fill_n(data, arg, *pr);
 	(*i)++;
 	return (TRUE);
 }
 
-int		ft_printf(const char *format, ... )
+int				ft_printf(const char *format, ...)
 {
-	size_t 	i;
-	int 	j;
+	size_t	i;
+	int		j;
 	va_list buffer;
-	size_t 	printed;
+	size_t	printed;
 
 	i = 0;
 	printed = 0;
@@ -125,4 +141,3 @@ int		ft_printf(const char *format, ... )
 	va_end(buffer);
 	return (printed);
 }
-
