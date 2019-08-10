@@ -14,7 +14,7 @@
 
 size_t	ft_dot(const char *str)
 {
-	size_t 	i;
+	int	i;
 
 	i = ft_strfchr(str, '.');
 	if (i == -1)

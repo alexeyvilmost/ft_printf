@@ -6,13 +6,11 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 02:37:37 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/10 13:02:23 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/10 13:03:39 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-// TODO: puts '/' sometimes
 
 static char	*l_base_diff(char *main, char *diff, t_llong i, t_llong j)
 {

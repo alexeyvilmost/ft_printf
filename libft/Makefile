@@ -6,7 +6,7 @@
 #    By: pallspic <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 20:50:17 by pallspic          #+#    #+#              #
-#    Updated: 2019/08/10 09:08:59 by pallspic         ###   ########.fr        #
+#    Updated: 2019/08/10 13:57:04 by pallspic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,8 @@ override CC = gcc
 
 NAME = libft.a
 
-SRC = ft_abs.c ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
-	ft_isprint.c ft_isspace.c ft_itoa.c ft_bzero.c ft_memalloc.cft_lstiter.c \
+SRC = ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
+	ft_isprint.c ft_isspace.c ft_itoa.c ft_bzero.c ft_memalloc.c ft_lstiter.c \
 	  ft_memcpy.c ft_memcmp.c ft_memset.c ft_memchr.c ft_memmove.c ft_memdel.c \
 	  ft_memccpy.c ft_putnbr.c ft_putchar.c ft_putstr.c ft_putendl.c \
 	  ft_putnbr_fd.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_lstmap.c \
@@ -44,6 +44,9 @@ SRC = ft_abs.c ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
 	  ft_extra_funcs/ft_strjoinfree.c \
 	  ft_extra_funcs/ft_isupper.c \
 	  ft_extra_funcs/ft_islower.c \
+	  ft_extra_funcs/ft_get.c \
+	  ft_extra_funcs/ft_max.c \
+	  ft_extra_funcs/ft_memsetloc.c \
 	  ft_long_math/ft_long.c \
 	  ft_long_math/ft_long_div.c \
 	  ft_long_math/ft_long_diff.c \

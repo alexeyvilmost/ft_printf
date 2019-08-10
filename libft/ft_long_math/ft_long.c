@@ -48,4 +48,6 @@ char 	*ft_long(char *first_num, char *second_num, char option, short free_or_acc
 ** 2: free both
 ** 3: free only second_num
 ** 4+: do nothing
+ * "0.00000000000009999341886080801486968994140625"
+ * "0.000000000000000001"
 */

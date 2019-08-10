@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 02:55:52 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/10 12:34:09 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/10 12:43:01 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static char *l_base_div(char *divider, char *dividend, short accur)
 char    *ft_long_div(char *first, char *second, short accur)
 {
     char *fst = NULL;
-    char *snd = NULL;
 
 	fst = (accur) ? ft_strjoinfree(first, ft_get(accur, '0'), -1, 3) : ft_strdup(first);
     if (!ft_dot(first) && !ft_dot(second))

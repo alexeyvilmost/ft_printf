@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 20:51:28 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/10 13:14:02 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/10 13:53:18 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ t_type	pf_pre_put(t_type data, _Bool neg)
 ** Печатает число, предстваленное в виде строки, оканчивающейся \0, а также
 ** необходимые символы, в зависимости от представленных в data опций
 */
-
-// TODO: remove extra '0' for float numbers ("%.3f", 0.000039)
 
 t_type	pf_put(t_type data, t_llong size, short f)
 {
@@ -110,5 +108,11 @@ char	*pf_double_line(t_double db, int accur)
 		buff = ft_long("1", ft_itoa(ft_pow(2, -power)), '/', power);
 		ret = ft_long(ret, buff, '+', 2);
 	}
+	expo = ft_dot(ret) + accur + 1;
+	if (ret[expo] > '4')
+		ret = ft_long(ret, ft_strjoinfree("0.",
+				ft_strjoinfree(ft_get(expo - 2, '0'),
+						"1", -1, 1), -1, 3), '+', 2);
+	ret[expo] = '\0';
 	return (ret);
 }

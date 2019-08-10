@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 18:50:22 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/10 09:08:52 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/10 11:58:40 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,6 @@ typedef struct		s_type
 	size_t			len;
 	size_t			printed;
 }					t_type;
-
-/*
-** ---------------------+ t_lmath +--------------------------
-*/
-
-typedef struct		s_lmath
-{
-	t_llong			decimal;
-	t_llong			divider;
-	t_llong			dividend;
-}					t_lmath;
 
 /*
 ** ----------------------+ t_double +--------------------------
