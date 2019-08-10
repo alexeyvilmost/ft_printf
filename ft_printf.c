@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 18:50:08 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/08 17:01:02 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/10 09:01:36 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static size_t	pf_type_parser(t_type data, va_list arg)
 	if (ft_strchr("diuoxX", data.spec))
 		return (pf_put_n(data, arg, 0, 0).printed);
 	if (data.spec == 'f')
-		return (pf_put_f(data, arg, 0, 0).printed);
+		return (pf_put_f(data, arg).printed);
 	if (data.spec == 'p')
 	{
 		data.type = 'L';

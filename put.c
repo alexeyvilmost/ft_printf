@@ -6,10 +6,11 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 21:02:31 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/08 19:49:15 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/10 09:08:59 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ft_printf.h>
 #include "ft_printf.h"
 
 /*
@@ -43,6 +44,9 @@ t_type	pf_put_n(t_type data, va_list arg, t_llong i, t_ullong n)
 	return (pf_pre_put(data, ft_strchr(USIGN, data.spec) ? 0 : (i < 0)));
 }
 
+// TODO: nubmbers lower than 1 don't works ("%f", 0.0894255)
+
+/*
 t_type	pf_put_f(t_type data, va_list arg, size_t i, size_t j)
 {
 	int			accur;
@@ -74,6 +78,34 @@ t_type	pf_put_f(t_type data, va_list arg, size_t i, size_t j)
 		return (pf_pre_put(data, db.memory.sign));
 	data.line[i] = '\0';
 	return (pf_rounding(data, i, db));
+}
+*/
+
+t_type pf_put_f(t_type data, va_list arg)
+{
+	int 		accur;
+	t_lmath		math;
+	t_double	db;
+	char 		*buff;
+
+	accur = (data.accur == -1) ? 6 : data.accur;
+	db.main = (data.type == 'L') ? va_arg(arg, t_ldouble) : va_arg(arg, double);
+	data.line = ft_strnew(ft_nsize(ft_abs((t_llong)db.main)) + accur + 1);
+//	data = pf_double_line(math, db, data, accur);
+	if (!data.accur)
+		return (pf_pre_put(data, db.memory.sign));
+	if (data.line[data.len - 1] < '5')
+	{
+		data.line[data.len--] = '\0';
+		return (pf_pre_put(data, db.memory.sign));
+	}
+	buff = ft_strnew(data.len - ft_dot(data.line));
+	ft_memset(buff, '0', data.len - ft_dot(data.line));
+	buff[ft_strlen(buff) - 1] = '1';
+	buff = ft_strjoinfree("0.", buff, -1, 3);
+	data.line = ft_long(data.line, buff, '+', 3);
+	data.line[data.len--] = '\0';
+	return (pf_pre_put(data, db.memory.sign));
 }
 
 t_type	pf_put_s(t_type data, va_list arg)

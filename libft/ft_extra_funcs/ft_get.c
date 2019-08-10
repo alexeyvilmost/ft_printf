@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_get.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pallspic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/10 16:07:14 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/01 16:10:24 by pallspic         ###   ########.fr       */
+/*   Created: 2019/08/10 11:16:24 by pallspic          #+#    #+#             */
+/*   Updated: 2019/08/10 11:16:24 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_itoa(t_llong num)
+char 	*ft_get(size_t amount, int symbol)
 {
-	return (ft_itoa_base(num, 10, 'a'));
+	char *nulles;
+
+	nulles = ft_memsetloc(amount + 1, symbol);
+	return (ft_strsub(nulles, 0, amount));
 }

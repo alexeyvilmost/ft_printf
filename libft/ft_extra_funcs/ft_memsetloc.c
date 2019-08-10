@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strfchr.c                                       :+:      :+:    :+:   */
+/*   ft_memsetloc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/07 15:01:58 by pallspic          #+#    #+#             */
-/*   Updated: 2019/07/07 15:13:00 by pallspic         ###   ########.fr       */
+/*   Created: 2019/08/10 01:36:01 by pallspic          #+#    #+#             */
+/*   Updated: 2019/08/10 01:36:01 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strfchr(const char *str, int to_find)
+void	*ft_memsetloc(size_t size, int val)
 {
-	int		i;
+	void	*ret;
 
-	i = 0;
-	while (str[i] && str[i] != to_find)
-		i++;
-	if (str[i] == to_find)
-		return (i);
-	return (ERROR);
+	if (!(ret = malloc(size)))
+		return (NULL);
+	ft_memset(ret, val, size);
+	return (ret);
 }

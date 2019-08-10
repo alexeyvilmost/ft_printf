@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pallspic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/10 16:07:14 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/01 16:10:24 by pallspic         ###   ########.fr       */
+/*   Created: 2019/08/10 09:58:56 by pallspic          #+#    #+#             */
+/*   Updated: 2019/08/10 09:58:56 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_itoa(t_llong num)
+t_llong		ft_max(t_llong first_num, t_llong second_num)
 {
-	return (ft_itoa_base(num, 10, 'a'));
+	return (first_num >= second_num ? first_num : second_num);
+}
+
+t_llong		ft_min(t_llong first_num, t_llong second_num)
+{
+	return (first_num <= second_num ? first_num : second_num);
 }

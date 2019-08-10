@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_strfchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pallspic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/10 16:07:14 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/01 16:10:24 by pallspic         ###   ########.fr       */
+/*   Created: 2019/07/07 15:01:58 by pallspic          #+#    #+#             */
+/*   Updated: 2019/08/10 00:11:36 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_itoa(t_llong num)
+int		ft_strfchr(const char *str, int to_find)
 {
-	return (ft_itoa_base(num, 10, 'a'));
+	int		i;
+
+	i = 0;
+	while (str[i] && str[i] != to_find)
+		i++;
+	if (str[i] == to_find)
+		return (i);
+	return (ERROR);
 }

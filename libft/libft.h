@@ -6,7 +6,7 @@
 /*   By: pallspic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 20:42:22 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/01 16:10:24 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/10 10:40:07 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define FALSE 0
 # define ERROR -1
 
+typedef long double				t_ldouble;
 typedef const char*				t_cchar;
 typedef long long int			t_llong;
 typedef unsigned long int		t_ulong;
@@ -49,13 +50,18 @@ typedef long double				t_dbl;
 */
 
 t_ullong			ft_abs(long long n);
+char 				*ft_get(size_t amount, int symbol);
 t_llong				ft_pow(t_llong to_raise, short power);
 long double			ft_pow_dbl(long double to_raise, short power);
+t_llong				ft_max(t_llong first_num, t_llong second_num);
+t_llong				ft_min(t_llong first_num, t_llong second_num);
 char				*ft_itoa_base(t_ullong num, t_ushort base, char letter);
 
 _Bool				ft_isspace(char c);
 _Bool				ft_isupper(int chr);
 _Bool				ft_islower(int chr);
+
+void				*ft_memsetloc(size_t size, int val);
 
 short				ft_nsize(t_ullong n);
 short				ft_nsize_base(t_ullong n, short base);
@@ -64,9 +70,24 @@ t_ullong			ft_nmult_base(t_ullong n, short base);
 
 char				*ft_strrev(char *str);
 int					ft_strfchr(const char *str, int to_find);
-char				*ft_strjoinfreef(char *s1, t_cchar s2, t_llong amount);
-char				*ft_strjoinfrees(t_cchar s1, char *s2, t_llong amount);
 char				*ft_strerase(t_cchar to_erase, int start_pos, int size);
+char				*ft_strjoinfree(char *s1, char *s2, t_llong amount, char to_free);
+
+/*
+** --------------------------+ long math +-------------------------------------
+*/
+
+size_t				ft_dot(const char *str);
+size_t				ft_after_dot(const char *str);
+size_t				ft_before_dot(const char *str);
+int 				ft_longcmp(t_cchar n1, t_cchar n2);
+char				*ft_rm_dot(char	*str, _Bool to_free);
+char 				*ft_put_dot(char *str, size_t where, _Bool to_free);
+
+char				*ft_long_sum(char *main, char *add);
+char				*ft_long_diff(char *main, char *diff);
+char    			*ft_long_div(char *first, char *second, short accur);
+char 				*ft_long(char *first_num, char *second_num, char option, short to_free);
 
 /*
 ** =======================# Standard functions: #===============================

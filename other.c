@@ -6,10 +6,11 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 20:51:28 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/08 20:03:41 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/10 13:14:02 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ft_printf.h>
 #include "ft_printf.h"
 
 /*
@@ -56,6 +57,8 @@ t_type	pf_pre_put(t_type data, _Bool neg)
 ** необходимые символы, в зависимости от представленных в data опций
 */
 
+// TODO: remove extra '0' for float numbers ("%.3f", 0.000039)
+
 t_type	pf_put(t_type data, t_llong size, short f)
 {
 	f = ((int)data.len > data.accur || data.accur < 0) ? 0 :
@@ -83,54 +86,29 @@ t_type	pf_put(t_type data, t_llong size, short f)
 	return (data);
 }
 
-t_type	pf_long_math(t_lmath *math, t_double db, t_type data, size_t *i)
+char	*pf_double_line(t_double db, int accur)
 {
-	math->divider = db.memory.expo - B127;
-	math->decimal = (math->divider >= 0) ? ft_pow(2, math->divider) : 0;
-	math->divider = B23 - math->divider;
-	math->dividend = db.memory.mant;
-	while (math->divider > 60 && --math->divider)
-		math->dividend /= 2;
-	math->divider = ft_pow(2, math->divider);
-	if (math->divider && math->dividend > math->divider)
-	{
-		math->decimal += math->dividend / math->divider;
-		math->dividend -= ((t_ullong)((t_dbl)math->dividend /
-					(t_dbl)math->divider) * math->divider);
-	}
-	if (!data.accur && ((t_dbl)math->dividend / (t_dbl)math->divider) > 0.5l)
-		math->decimal++;
-	data.line = ft_strcat(data.line, ft_itoa_base(math->decimal, 10, 'a'));
-	data.len = ft_strlen(data.line);
-	*i = data.len;
-	if (data.accur)
-		data.line[(*i)++] = '.';
-	return (data);
-}
+	char	*ret;
+	char	*buff;
+	t_llong expo;
+	t_llong mant;
+	const short	power = db.memory.expo - B127;
 
-t_type	pf_rounding(t_type data, size_t i, t_double db)
-{
-	if (ft_strchr(".9", data.line[i - 1]))
-		while (ft_strchr(".9", data.line[--i]) && i != 0)
-		{
-			data.line[i] == '.' ? --i : 0;
-			if (i != 0 && (data.line[i] == '9'))
-			{
-				data.line[i] = '0';
-				if (ft_isdigit(data.line[i - 1]) && data.line[i - 1] != '9')
-				{
-					data.line[i - 1]++;
-					return (pf_pre_put(data, db.memory.sign));
-				}
-			}
-			else if (data.line[i] == '9')
-			{
-				data.line[i] = '0';
-				data.line = ft_strjoinfrees("1", data.line, -1);
-				return (pf_pre_put(data, db.memory.sign));
-			}
-			else
-				data.line[i]++;
-		}
-	return (pf_pre_put(data, db.memory.sign));
+	expo = B23 - power;
+	mant = db.memory.mant;
+	if (expo < 60)
+		ret = ft_long(ft_itoa(mant), ft_itoa(ft_pow(2, expo)), '/', (accur + 1) * -1);
+	else
+	{
+		buff = ft_long(ft_itoa(mant), ft_itoa(ft_pow(2, expo - 60)), '/', 0);
+		ret = ft_long(buff, ft_itoa(ft_pow(2, 60)), '/', (accur + 1) * -1);
+	}
+	if (power > 0)
+		ret = ft_long(ret, ft_itoa(ft_pow(2, power)), '+', 2);
+	else
+	{
+		buff = ft_long("1", ft_itoa(ft_pow(2, -power)), '/', power);
+		ret = ft_long(ret, buff, '+', 2);
+	}
+	return (ret);
 }
