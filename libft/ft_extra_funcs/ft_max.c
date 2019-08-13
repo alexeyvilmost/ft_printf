@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/*
+** ft_max - return maximum of two input values
+** ft_min - return minimum of two input values
+*/
+
 t_llong		ft_max(t_llong first_num, t_llong second_num)
 {
 	return (first_num >= second_num ? first_num : second_num);

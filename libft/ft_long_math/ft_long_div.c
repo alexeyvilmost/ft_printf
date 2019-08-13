@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** l_base_div - divide one nline to the other by column division algo
+*/
+
 static char *l_base_div(char *divider, char *dividend, short accur)
 {
 	char	*ret;
@@ -48,6 +52,10 @@ static char *l_base_div(char *divider, char *dividend, short accur)
 	}
 	return (ret);
 }
+
+/*
+** ft_long_div - prepare nline before division
+*/
 
 char    *ft_long_div(char *first, char *second, short accur)
 {

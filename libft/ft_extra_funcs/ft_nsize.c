@@ -12,9 +12,14 @@
 
 #include "libft.h"
 
+/*
+** ft_nsize - count digits in number
+** ft_nsize_base - count digits in number, according on base
+*/
+
 short	ft_nsize_base(t_ullong n, short base)
 {
-	int i;
+	short i;
 
 	i = 1;
 	while (n /= base)
@@ -24,10 +29,5 @@ short	ft_nsize_base(t_ullong n, short base)
 
 short	ft_nsize(t_ullong n)
 {
-	int i;
-
-	i = 1;
-	while (n /= 10)
-		i++;
-	return (i);
+    return (ft_nsize_base(n, 10));
 }

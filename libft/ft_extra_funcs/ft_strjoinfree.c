@@ -13,7 +13,9 @@
 #include "libft.h"
 
 /*
-** !!!<ATTENTION>!!!
+** ft_strjoinfree - works like ft_strjoin, but free one
+** of the input str in the end
+**
 ** to_free param works that way:
 ** 0: free nothing
 ** 1-: free only s1

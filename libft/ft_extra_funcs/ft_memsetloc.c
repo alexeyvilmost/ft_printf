@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** ft_memsetloc - malloc (size) of memory and fills it with (val)
+*/
+
 void	*ft_memsetloc(size_t size, int val)
 {
 	void	*ret;

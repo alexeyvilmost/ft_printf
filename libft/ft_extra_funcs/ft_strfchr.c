@@ -12,7 +12,11 @@
 
 #include "libft.h"
 
-int		ft_strfchr(const char *str, int to_find)
+/*
+** ft_strfchr - return index of first matching (to_find) symbol in (str) string
+*/
+
+int		ft_strfchr(t_cchar str, int to_find)
 {
 	int		i;
 

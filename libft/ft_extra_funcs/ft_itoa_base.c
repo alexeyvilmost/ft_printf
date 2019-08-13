@@ -12,6 +12,13 @@
 
 #include "libft.h"
 
+/*
+** ft_itoa_base - converts integer to its strings representation
+** functions works similar to ft_ft_itoa, except for 2 additional fields:
+** base - contains numeric system base
+** letter - contains char, which case will be used for over 10-base systems
+*/
+
 static char	overbase(t_ushort n, char letter)
 {
 	if (n < 10)

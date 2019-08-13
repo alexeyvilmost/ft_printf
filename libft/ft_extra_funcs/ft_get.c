@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** ft_get - return NULL-terminated string of amount number of symbols
+*/
+
 char 	*ft_get(size_t amount, int symbol)
 {
 	char *nulles;

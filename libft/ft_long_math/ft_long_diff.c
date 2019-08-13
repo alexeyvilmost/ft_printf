@@ -12,9 +12,13 @@
 
 #include "libft.h"
 
+/*
+** l_base_diff - substuct one nline form the other by column substruct algo
+*/
+
 static char	*l_base_diff(char *main, char *diff, t_llong i, t_llong j)
 {
-	short 	rest;
+	char 	rest;
 	char 	*ret;
 
 	rest = 0;
@@ -27,7 +31,7 @@ static char	*l_base_diff(char *main, char *diff, t_llong i, t_llong j)
 		rest = ret[i] - diff[j] - rest;
 		if (ret[i] < diff[j] || (ret[i] == diff[i] && rest < 0))
 			rest += 20;
-		ret[i--] = (rest % 10) + '0';
+		ret[i--] = rest % 10 + '0';
 		j--;
 		rest /= 10;
 	}
@@ -39,6 +43,10 @@ static char	*l_base_diff(char *main, char *diff, t_llong i, t_llong j)
 	return (ret);
 }
 
+/*
+** ft_long_diff - prepare nlines before calling function l_base_diff
+*/
+
 char		*ft_long_diff(char *main, char *add)
 {
 	char 	*main_ = NULL;
@@ -46,7 +54,8 @@ char		*ft_long_diff(char *main, char *add)
 	char 	*ret_ = NULL;
 
 	if (ft_after_dot(main) == ft_after_dot(add))
-		return (l_base_diff(main, add, ft_strlen(main) - 1, ft_strlen(add) - 1));
+		return (l_base_diff(main, add,
+				ft_strlen(main) - 1, ft_strlen(add) - 1));
 	if (!ft_dot(main))
 		main_ = ft_strjoinfree(main, ".0", -1, 0);
 	else if (!ft_dot(add))
@@ -59,7 +68,8 @@ char		*ft_long_diff(char *main, char *add)
 	else
 		add_ = ft_strjoinfree(add_, ft_get(ft_after_dot(main_) -
 		ft_after_dot(add_), '0'), -1, 3);
-	ret_ = l_base_diff(main_, add_, ft_strlen(main_) - 1, ft_strlen(add_) - 1);
+	ret_ = l_base_diff(main_, add_,
+			ft_strlen(main_) - 1, ft_strlen(add_) - 1);
 	free(main_);
 	free(add_);
 	return (ret_);

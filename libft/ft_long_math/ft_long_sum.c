@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** l_base_sum - add one nline to other with column addition algo
+*/
+
 static char	*l_base_sum(char *main, char *add, t_llong i, t_llong j)
 {
 	short 	rest;
@@ -35,6 +39,10 @@ static char	*l_base_sum(char *main, char *add, t_llong i, t_llong j)
 		ret = ft_strjoinfree("1", ret, -1, 3);
 	return (ret);
 }
+
+/*
+** ft_long_sum - prepares nlines before addition
+*/
 
 char		*ft_long_sum(char *main, char *add)
 {

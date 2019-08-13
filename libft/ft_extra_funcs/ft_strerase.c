@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/*
+** ft_strerase - returns new string without part, starting on (start_pow), with
+** (size) length
+*/
+
 char	*ft_strerase(const char *to_erase, int start_pos, int size)
 {
 	char	*new;

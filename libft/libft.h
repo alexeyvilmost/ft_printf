@@ -39,14 +39,9 @@ typedef long double				t_dbl;
 ** ==============================# My funcs: #==================================
 **
 ** ft_abs - returns absolute value of int
-** ft_pow - raise number (to_raise) to a power (power)
-** ft_itoa_base - base-advanced version of itoa.
-** 					(letter) - is any char in up- or low-case (for a 10+ bases)
-** ft_isspace - returns if character is separator or not
-** ft_isupper - returns if character is in upcase or not
-** ft_islower - returns if character is in lowcase or not
+** ft_pow - raise number to a power
 ** ft_strrev - replace input string to a reversed version
-** ft_strnchr - returns the position of first matching symbol
+** ft_strfchr - returns the position of first matching symbol
 */
 
 t_ullong			ft_abs(long long n);
@@ -68,7 +63,7 @@ short				ft_nsize_base(t_ullong n, short base);
 t_ullong			ft_nmult(t_ullong n);
 t_ullong			ft_nmult_base(t_ullong n, short base);
 
-char				*ft_strrev(char *str);
+char				*ft_strrev(const char *str);
 int					ft_strfchr(const char *str, int to_find);
 char				*ft_strerase(t_cchar to_erase, int start_pos, int size);
 char				*ft_strjoinfree(char *s1, char *s2, t_llong amount, char to_free);

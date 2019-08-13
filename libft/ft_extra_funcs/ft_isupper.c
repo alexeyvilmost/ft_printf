@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** ft_islower - check if it a character is in uppercase or not
+*/
+
 _Bool	ft_isupper(int chr)
 {
 	return ((chr >= 65 && chr <= 90) ? 1 : 0);

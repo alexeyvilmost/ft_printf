@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/*
+** ft_nmult - return max number divident, which also a power of 10 (345 - 100)
+** ft_nmult_base - return max number divident, which also a power of base
+*/
+
 t_ullong	ft_nmult_base(t_ullong to_count, short base)
 {
 	size_t	mult;
@@ -24,10 +29,5 @@ t_ullong	ft_nmult_base(t_ullong to_count, short base)
 
 t_ullong	ft_nmult(t_ullong to_count)
 {
-	size_t	mult;
-
-	mult = 1;
-	while (to_count /= 10)
-		mult *= 10;
-	return (mult);
+    return (ft_nmult_base(to_count, 10));
 }

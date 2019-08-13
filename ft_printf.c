@@ -36,6 +36,13 @@ static t_type	pf_new_list(void)
 	return (data);
 }
 
+/*
+** pf_type_parser
+**
+** type fork, removing extra flags, stabilize data.size
+** calls the function according to a data.spec and handle 'p' 
+*/
+
 static size_t	pf_type_parser(t_type data, va_list arg)
 {
 	if (data.size < 0)
@@ -63,6 +70,20 @@ static size_t	pf_type_parser(t_type data, va_list arg)
 	}
 	return (0);
 }
+
+/*
+** pf_get_spec and pf_get_params fills a main fields of t_type:
+** specificator	format : %[flag][size][accur][type][spec]
+**
+** char		data.flag[3] - cont(ains) flags, with handling mutually exclusive
+** 				data.flag[0] may be (sorted by priority) '-','0' or '\0'
+** 	data.flag[1] may be (as before) '+',' ' or '\0'
+** 	data.flag[2] may be '#' or '\0' (only needed for "oxXp" spec)
+** size_t	data.size - cont needed field-width for this value
+** size_t	data.accur - cont accur for "f" and min symbol must be displayed
+** char		data.type - cont type size spec(ificator) possible value: "lhLH"
+** char		data.spec - cont type spec, possible value: "diouxXpcsf"
+*/
 
 static t_type	pf_get_params(t_cchar s, size_t *i, t_type data, va_list arg)
 {
@@ -122,23 +143,23 @@ int				ft_printf(const char *format, ...)
 {
 	size_t	i;
 	int		j;
-	va_list buffer;
+	va_list args;
 	size_t	printed;
 
 	i = 0;
 	printed = 0;
 	if (!format)
 		return (0);
-	va_start(buffer, format);
+	va_start(args, format);
 	while ((j = ft_strfchr(&format[i], '%')) != -1)
 	{
 		write(1, &format[i], j);
 		printed += j;
 		i += j;
-		pf_get_spec(format, &i, buffer, &printed);
+		pf_get_spec(format, &i, args, &printed);
 	}
 	write(1, &format[i], ft_strlen(format) - i);
 	printed += ft_strlen(format) - i;
-	va_end(buffer);
+	va_end(args);
 	return (printed);
 }

@@ -12,12 +12,18 @@
 
 #include "libft.h"
 
-char	*ft_strrev(char *str)
+/*
+** ft_strrev - malloc and return revesed input string
+*/
+
+char	*ft_strrev(const char *str)
 {
 	size_t	end;
 	size_t	i;
 	char	c;
+    char    *ret;
 
+    ret = ft_strdup(str);
 	if (!str || !*str)
 		return ("");
 	i = 0;
@@ -25,8 +31,8 @@ char	*ft_strrev(char *str)
 	while (end > i)
 	{
 		c = str[end];
-		str[end--] = str[i];
-		str[i++] = c;
+		ret[end--] = str[i];
+		ret[i++] = c;
 	}
-	return (str);
+	return (ret);
 }

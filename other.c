@@ -30,30 +30,11 @@ size_t	pf_write(int symbol, size_t amount)
 	return (amount);
 }
 
-t_type	pf_pre_put(t_type data, _Bool neg)
-{
-	data.sign = neg;
-	if (data.len != 1)
-		data.len = ft_strlen(data.line);
-	data.add += (data.flag[1] || data.sign);
-	if (!ft_strchr("oxXp", data.spec))
-		data.flag[2] = '\0';
-	if (!data.flag[2])
-		return (pf_put(data, data.len, 0));
-	if (data.spec == 'o' && ft_strcmp(data.line, "0"))
-		data.len++;
-	else if (data.spec == 'p')
-		data.add += 2;
-	else if (ft_strcmp(data.line, "0") && data.line[0])
-		data.add += 2;
-	return (pf_put(data, data.len, 0));
-}
-
 /*
 ** Print necessary characters depending on data (flag; size; accur) options with
 ** a number, presented as NULL-terminated string;
 **
-** Печатает число, предстваленное в виде строки, оканчивающейся \0, а также
+** Печатает число, предстaвленное в виде строки, оканчивающейся \0, а также
 ** необходимые символы, в зависимости от представленных в data опций
 */
 
@@ -83,6 +64,34 @@ t_type	pf_put(t_type data, t_llong size, short f)
 			pf_write(' ', size - data.add) : 0;
 	return (data);
 }
+
+/*
+** prepares data elems before calling fuction pf_put 
+*/
+
+t_type	pf_pre_put(t_type data, _Bool neg)
+{
+	data.sign = neg;
+	if (data.len != 1)
+		data.len = ft_strlen(data.line);
+	data.add += (data.flag[1] || data.sign);
+	if (!ft_strchr("oxXp", data.spec))
+		data.flag[2] = '\0';
+	if (!data.flag[2])
+		return (pf_put(data, data.len, 0));
+	if (data.spec == 'o' && ft_strcmp(data.line, "0"))
+		data.len++;
+	else if (data.spec == 'p')
+		data.add += 2;
+	else if (ft_strcmp(data.line, "0") && data.line[0])
+		data.add += 2;
+	return (pf_put(data, data.len, 0));
+}
+
+/*
+** pf_double_line works similar to itoa - takes db (union for memory parsing)
+** and returnes line as NULL-terminated string representation
+*/
 
 char	*pf_double_line(t_double db, int accur)
 {

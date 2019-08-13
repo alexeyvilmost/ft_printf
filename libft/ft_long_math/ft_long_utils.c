@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** ft_dot - return index of dot in double nline, or 0 if there's no dot
+*/
+
 size_t	ft_dot(const char *str)
 {
 	int	i;
@@ -22,6 +26,10 @@ size_t	ft_dot(const char *str)
 	return (i);
 }
 
+/*
+** ft_after_dot - count symbols after dot in double nline, or 0 if there no dot
+*/
+
 size_t	ft_after_dot(const char *str)
 {
 	if (!ft_dot(str))
@@ -29,12 +37,15 @@ size_t	ft_after_dot(const char *str)
 	return (ft_strlen(str) - ft_dot(str) - 1);
 }
 
-int 	ft_longcmp(t_cchar n1, t_cchar n2)
-{
-	const size_t	dot1 = ft_dot(n1);
-	const size_t	dot2 = ft_dot(n2);
-	size_t 			len1;
-	size_t 			len2;
+/*
+** ft_longcmp - return is similar to strcmp, but compare nline instead of string
+*/
+
+int 	ft_longcmp(t_cchar n1, t_cchar n2) {
+	const size_t dot1 = ft_dot(n1);
+	const size_t dot2 = ft_dot(n2);
+	size_t len1;
+	size_t len2;
 
 	len1 = (dot1) ? dot1 : ft_strlen(n1);
 	len2 = (dot2) ? dot2 : ft_strlen(n2);
@@ -43,18 +54,9 @@ int 	ft_longcmp(t_cchar n1, t_cchar n2)
 	return (len1 > len2 ? 1 : -1);
 }
 
-char	*ft_rm_dot(char	*str, _Bool to_free)
-{
-	size_t	dot;
-	char 	*ret;
-
-	dot = ft_dot(str);
-	ret = ft_strjoinfree(ft_strsub(str, 0, dot),
-			ft_strsub(str, dot + 1, ft_strlen(str) - dot - 1), -1, 2);
-	if (to_free)
-		free(str);
-	return (ret);
-}
+/*
+** ft_put_dot - put '.' in string and free it if needed
+*/
 
 char 	*ft_put_dot(char *str, size_t where, _Bool to_free)
 {

@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** ft_abs - return absolute value of number
+*/
+
 t_ullong	ft_abs(long long n)
 {
 	return (n > 0 ? n : -n);

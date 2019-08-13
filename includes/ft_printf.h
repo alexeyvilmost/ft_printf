@@ -35,6 +35,9 @@
 ** data.flag[2]: '#'
 ** data.type - 'L' for ll; 'H' for hh; the same char for other
 ** data.line: string representation that will be displayed
+** data.base: 0 for 10-based nums, 8 for 'o', 16 for 'xXp'
+** data.add: contains len of value that's must be a part of num ("0x", etc)
+** data.len: len of data.line
 ** data.printed: number of displayed characters
 ** -----------------------------------------------------------
 */
