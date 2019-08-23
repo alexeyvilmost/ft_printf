@@ -6,14 +6,14 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 18:50:22 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/10 11:58:40 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/23 20:26:12 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "../libft/libft.h"
+# include "libft.h"
 # include <stdarg.h>
 # include <limits.h>
 # include <stdio.h>
@@ -96,7 +96,6 @@ int					ft_printf(const char *restrict format, ...);
 
 t_type				pf_put_c(t_type data, va_list arg);
 t_type				pf_put_s(t_type data, va_list arg);
-//t_type				pf_put_f(t_type data, va_list arg, size_t i, size_t j);
 t_type				pf_put_f(t_type data, va_list arg);
 t_type				pf_put_n(t_type data, va_list arg, t_llong i, t_ullong n);
 void				pf_fill_n(t_type data, va_list arg, int printed);

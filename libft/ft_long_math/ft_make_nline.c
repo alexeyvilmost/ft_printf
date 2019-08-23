@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_make_nline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pallspic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 18:58:18 by pallspic          #+#    #+#             */
+/*   Created: 2019/08/23 19:32:22 by pallspic          #+#    #+#             */
 /*   Updated: 2019/08/23 20:26:12 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_memcmp(const void *mem1, const void *mem2, size_t size)
+char 	*ft_nline(int pos, char *num)
 {
-	unsigned char	*buff1;
-	unsigned char	*buff2;
+	char *nulles;
 
-	buff1 = (unsigned char *)mem1;
-	buff2 = (unsigned char *)mem2;
-	while (size--)
-		if (*buff1++ != *buff2++)
-			return ((int)*(--buff1) - (int)*(--buff2));
-	return (0);
+	nulles = ft_get(ft_abs(pos) - 1, '0');
+	if (pos > 0)
+	{
+		if (nulles[0])
+			return (ft_strjoinfree(num, nulles, -1, 3));
+		else
+			return (ft_strdup(num));
+	}
+	else if (pos < 0)
+	{
+		if (nulles[0])
+			return (ft_strjoinfree("0.", ft_strjoinfree(nulles, num, -1, 1), -1, 3));
+		else
+			return (ft_strjoinfree("0.", num, -1, 0));
+	}
+	else
+		return (ft_strdup(num));
 }

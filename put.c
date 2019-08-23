@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 21:02:31 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/10 13:33:14 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/23 19:19:00 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ t_type pf_put_f(t_type data, va_list arg)
 	accur = (data.accur == -1) ? 6 : data.accur;
 	db.main = (data.type == 'L') ? va_arg(arg, t_ldouble) : va_arg(arg, double);
 	data.line = pf_double_line(db, accur);
+	if (accur == 0 && !data.flag[2])
+		data.line[ft_dot(data.line)] = '\0';
 	return (pf_pre_put(data, db.memory.sign));
 }
 

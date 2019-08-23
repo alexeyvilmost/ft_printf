@@ -52,7 +52,7 @@ static size_t	pf_type_parser(t_type data, va_list arg)
 	}
 	if (data.spec == 'u')
 		data.flag[1] = '\0';
-	if (data.flag[2] && !ft_strchr("oxX", data.spec))
+	if (data.flag[2] && !ft_strchr("oxXf", data.spec))
 		data.flag[2] = '\0';
 	if (data.spec == 'c' || data.spec == '%')
 		return (pf_put_c(data, arg).printed);

@@ -6,7 +6,7 @@
 #    By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/21 15:21:19 by pallspic          #+#    #+#              #
-#    Updated: 2019/07/24 17:11:46 by pallspic         ###   ########.fr        #
+#    Updated: 2019/08/23 19:17:51 by pallspic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ libft:
 %.a:
 	$(LIB_MAKE)
 
-%.o: %.c
+obj/%.o: %.c
 	gcc -c $(CFLAGS) $<
 
 fclean: clean

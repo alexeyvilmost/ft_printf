@@ -52,6 +52,7 @@ SRC = ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
 	  ft_long_math/ft_long_diff.c \
 	  ft_long_math/ft_long_sum.c \
 	  ft_long_math/ft_long_utils.c \
+	  ft_long_math/ft_make_nline.c
 
 OBJ = $(SRC:.c=.o)
 

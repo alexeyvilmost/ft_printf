@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 20:51:28 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/10 13:53:18 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/23 20:13:05 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_type	pf_put(t_type data, t_llong size, short f)
 	f = ((int)data.len > data.accur || data.accur < 0) ? 0 :
 		(size = data.accur);
 	if ((size = data.size - size) > data.add &&
-			(!data.flag[0] || (data.flag[0] == O && data.accur != -1)))
+			(!data.flag[0] || (data.flag[0] == O && data.accur != -1 && data.spec != 'f')))
 		data.printed += pf_write(' ', size - data.add);
 	if (data.sign)
 		data.printed += write(1, "-", 1);
@@ -107,7 +107,7 @@ char	*pf_double_line(t_double db, int accur)
 		ret = ft_long(ft_itoa(mant), ft_itoa(ft_pow(2, expo)), '/', (accur + 1) * -1);
 	else
 	{
-		buff = ft_long(ft_itoa(mant), ft_itoa(ft_pow(2, expo - 60)), '/', 0);
+		buff = ft_long(ft_itoa(mant), ft_itoa(ft_pow(2, expo - 60)), '/', 5);
 		ret = ft_long(buff, ft_itoa(ft_pow(2, 60)), '/', (accur + 1) * -1);
 	}
 	if (power > 0)
@@ -117,11 +117,8 @@ char	*pf_double_line(t_double db, int accur)
 		buff = ft_long("1", ft_itoa(ft_pow(2, -power)), '/', power);
 		ret = ft_long(ret, buff, '+', 2);
 	}
-	expo = ft_dot(ret) + accur + 1;
-	if (ret[expo] > '4')
-		ret = ft_long(ret, ft_strjoinfree("0.",
-				ft_strjoinfree(ft_get(expo - 2, '0'),
-						"1", -1, 1), -1, 3), '+', 2);
-	ret[expo] = '\0';
+	if (ret[accur + ft_dot(ret) + 1] > '4')
+		ret = ft_long(ret, ft_nline(-accur, "1"), '+', 1);
+	ret[accur + ft_dot(ret) + 1] = '\0';
 	return (ret);
 }
