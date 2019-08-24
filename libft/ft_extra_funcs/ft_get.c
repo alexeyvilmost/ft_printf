@@ -19,9 +19,12 @@
 char 	*ft_get(int amount, int symbol)
 {
 	char	*nulles;
+	char 	*ret;
 
 	if (amount < 0)
 		return (ft_strnew(1));
 	nulles = ft_memsetloc(amount + 1, symbol);
-	return (ft_strsub(nulles, 0, amount));
+	ret = ft_strsub(nulles, 0, amount);
+	free(nulles);
+	return (ret);
 }

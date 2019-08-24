@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 02:55:52 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/24 16:17:58 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/24 19:28:13 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 static char *l_base_div(char *divider, char *dividend, short accur)
 {
 	char	*ret;
-	char 	*num[12];
+	char 	*num[10];
+	char	*_div;
+	char 	*temp;
 	t_llong	s = 0;
 	size_t	i = 0;
 	t_llong	j = 1;
@@ -29,30 +31,31 @@ static char *l_base_div(char *divider, char *dividend, short accur)
 	while (++j < 10)
 		num[j] = ft_long(dividend, num[j - 1], '+', 0);
 	ret = ft_strnew(ft_strlen(divider) + accur + 1);
-	num[11] = ft_strdup(divider);
-	num[0] = ft_memsetloc(ft_strlen(divider) + accur + 1, '0');
-	num[10] = ft_strjoinfree(dividend, ft_strsub(num[0], 0, s++), -1, 3);
-	if (ft_longcmp(num[11], num[10]) > 0)
-		while (ft_longcmp(num[11], num[10]) > 0)
-		{
-			free(num[10]);
-			num[10] = ft_strjoinfree(dividend, ft_strsub(num[0], 0, s++), -1, 3);
-		}
+	_div = ft_strdup(divider);
+	temp = ft_nline(++s, dividend, 0);
+	while (ft_longcmp(_div, temp) > 0)
+	{
+		free(temp);
+		temp = ft_nline(++s, dividend, 0);
+	}
+	free(temp);
 	while (--s >= 0)
 	{
 		j = 10;
-		num[10] = ft_strjoinfree(num[--j], ft_strsub(num[0], 0, s), -1, 3);
-		while (ft_longcmp(num[11], num[10]) < 0 && j > 0)
+		temp = ft_nline(s + 1, num[--j], 0);
+		while (ft_longcmp(_div, temp) < 0 && j > 0)
 		{
-			free(num[10]);
-			num[10] = ft_strjoinfree(num[--j], ft_strsub(num[0], 0, s), -1, 3);
+			free(temp);
+			temp = ft_nline(s + 1, num[--j], 0);
 		}
-		(j > 0) ? num[11] = ft_long(num[11], num[10], '-', 2) : 0;
+		(j > 0) ? _div = ft_long(_div, temp, '-', 1) : 0;
+		free(temp);
 		ret[i++] = j + '0';
 	}
-	j = -1;
+	j = 0;
 	while (++j < 10)
 		free(num[j]);
+	free(_div);
 	free(divider);
 	return (ret);
 }
@@ -65,9 +68,9 @@ char    *ft_long_div(char *first, char *second, short accur)
 {
     char *fst = NULL;
 
-	fst = (accur) ? ft_strjoinfree(first, ft_get(accur, '0'), -1, 3) : ft_strdup(first);
+	fst = (accur) ? ft_nline(accur + 1, first, 0) : ft_strdup(first);
     if (ft_strequ(first, "0") || ft_strequ(second, "0"))
-    	return (ft_nline(-accur, ft_strdup("0")));
+    	return (ft_nline(-accur, "0", 0));
 	if (!ft_dot(first) && !ft_dot(second))
 	{
     	if (!accur)

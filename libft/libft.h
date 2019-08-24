@@ -6,7 +6,7 @@
 /*   By: pallspic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 20:42:22 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/24 15:37:28 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/24 17:52:29 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ size_t				ft_dot(const char *str);
 size_t				ft_after_dot(const char *str);
 char				*ft_bin_nline(int power);
 int 				ft_longcmp(const char *n1, const char *n2);
-char 				*ft_nline(int pos, char *num);
+char 				*ft_nline(int pos, char *num, _Bool to_free);
 char				*ft_rm_dot(char	*str, _Bool to_free);
 char 				*ft_put_dot(char *str, size_t where, _Bool to_free);
 

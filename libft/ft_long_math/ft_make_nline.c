@@ -6,13 +6,13 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/23 19:32:22 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/24 16:33:08 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/24 17:53:01 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char 	*ft_nline(int pos, char *num)
+char 	*ft_nline(int pos, char *num, _Bool to_free)
 {
 	char	*nulles;
 	char	*ret;
@@ -35,7 +35,8 @@ char 	*ft_nline(int pos, char *num)
 	else
 		ret = ft_strdup(num);
 	free(nulles);
-	free(num);
+	if (to_free)
+		free(num);
 	return (ret);
 }
 

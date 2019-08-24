@@ -70,14 +70,12 @@ t_type	pf_put_s(t_type data, va_list arg)
 		data.line = ft_strsub(data.line, 0, data.accur);
 	size = ft_strlen(data.line);
 	if (data.size > (int)size && data.flag[0] != '-')
-		pf_write(' ', data.size - size);
+		data.printed += pf_write(' ', data.size - size);
 	ft_putstr(data.line);
 	data.printed += ft_strlen(data.line);
 	free(data.line);
 	if (data.size > (int)size && data.flag[0] == '-')
-		pf_write(' ', data.size - size);
-	if (data.size > (int)size)
-		data.printed += data.size - size;
+		data.printed += pf_write(' ', data.size - size);
 	return (data);
 }
 

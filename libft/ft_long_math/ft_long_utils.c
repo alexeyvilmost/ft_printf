@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 00:11:05 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/23 20:26:12 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/24 19:39:14 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@ size_t	ft_after_dot(const char *str)
 }
 
 /*
-** ft_longcmp - return is similar to strcmp, but compare nline instead of string
+** ft_longcmp - behaviour is similar to strcmp, but compare nlines
+** instead of string
 */
 
-int 	ft_longcmp(t_cchar n1, t_cchar n2) {
+int 	ft_longcmp(t_cchar n1, t_cchar n2)
+{
 	const size_t dot1 = ft_dot(n1);
 	const size_t dot2 = ft_dot(n2);
 	size_t len1;
@@ -74,6 +76,7 @@ char 	*ft_put_dot(char *str, size_t where, _Bool to_free)
 				ft_strjoinfree(".",
 				ft_strsub(buff, a, len), -1, 3), -1, 2);
 	}
+	free(buff);
 	if (to_free)
 		free(str);
 	return (ret);

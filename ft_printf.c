@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 18:50:08 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/24 12:56:39 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/24 18:13:32 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,13 +153,11 @@ int				ft_printf(const char *format, ...)
 	va_start(args, format);
 	while ((j = ft_strfchr(&format[i], '%')) != -1)
 	{
-		write(1, &format[i], j);
-		printed += j;
+		printed += write(1, &format[i], j);
 		i += j;
 		pf_get_spec(format, &i, args, &printed);
 	}
-	write(1, &format[i], ft_strlen(format) - i);
-	printed += ft_strlen(format) - i;
+	printed += write(1, &format[i], ft_strlen(format) - i);
 	va_end(args);
 	return (printed);
 }

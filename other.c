@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 20:51:28 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/24 16:24:58 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/24 18:44:37 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_type	pf_put(t_type data, t_llong size, short f)
 		data.printed += pf_write(' ', size - data.add);
 	if (data.sign)
 		data.printed += write(1, "-", 1);
-	else if (data.flag[1] && ft_strchr("+ ", data.flag[1]))
+	else if (data.flag[1])
 		data.printed += write(1, &data.flag[1], 1);
 	if (data.flag[2] == '#' && data.spec == 'o' && ft_strcmp(data.line, "0"))
 		data.printed += write(1, "0", 1);
@@ -112,7 +112,7 @@ char	*pf_double_line(t_double db, int accur)
 		ret = ft_long(ret, buff, '+', 2);
 	}
 	if (ret[accur + ft_dot(ret) + 1] > '4')
-		ret = ft_long(ret, ft_nline(-accur, ft_strdup("1")), '+', 2);
+		ret = ft_long(ret, ft_nline(-accur, "1", 0), '+', 2);
 	ret[accur + ft_dot(ret) + 1] = '\0';
 	return (ret);
 }

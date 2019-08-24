@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 02:37:37 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/24 15:19:00 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/24 19:07:28 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,9 @@ char		*ft_long_diff(char *main, char *add)
 	(!main_) ? main_ = ft_strdup(main) : 0;
 	(!add_) ? add_ = ft_strdup(add) : 0;
 	if (ft_after_dot(main_) < ft_after_dot(add_))
-		main_ = ft_strjoinfree(main_, ft_get(ft_after_dot(add_) -
-		ft_after_dot(main_), '0'), -1, 3);
+		main_ = ft_nline(ft_after_dot(add_) -  ft_after_dot(main_) + 1, main_, 1);
 	else
-		add_ = ft_strjoinfree(add_, ft_get(ft_after_dot(main_) -
-		ft_after_dot(add_), '0'), -1, 3);
+		add_ = ft_nline(ft_after_dot(main_) - ft_after_dot(add_) + 1, add_, 1);
 	ret_ = l_base_diff(main_, add_,
 			ft_strlen(main_) - 1, ft_strlen(add_) - 1);
 	free(main_);
