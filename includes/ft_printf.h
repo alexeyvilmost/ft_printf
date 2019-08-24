@@ -6,14 +6,14 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 18:50:22 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/23 20:26:12 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/24 14:48:05 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft.h"
+# include "../libft/libft.h"
 # include <stdarg.h>
 # include <limits.h>
 # include <stdio.h>

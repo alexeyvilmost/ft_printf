@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 20:51:28 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/23 20:13:05 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/24 16:24:58 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,22 +103,16 @@ char	*pf_double_line(t_double db, int accur)
 
 	expo = B23 - power;
 	mant = db.memory.mant;
-	if (expo < 60)
-		ret = ft_long(ft_itoa(mant), ft_itoa(ft_pow(2, expo)), '/', (accur + 1) * -1);
-	else
-	{
-		buff = ft_long(ft_itoa(mant), ft_itoa(ft_pow(2, expo - 60)), '/', 5);
-		ret = ft_long(buff, ft_itoa(ft_pow(2, 60)), '/', (accur + 1) * -1);
-	}
+	ret = ft_long(ft_itoa(mant), ft_bin_nline(expo), '/', (accur + 1) * -1);
 	if (power > 0)
 		ret = ft_long(ret, ft_itoa(ft_pow(2, power)), '+', 2);
 	else
 	{
-		buff = ft_long("1", ft_itoa(ft_pow(2, -power)), '/', power);
+		buff = ft_long(ft_strdup("1"), ft_bin_nline(-power), '/', power);
 		ret = ft_long(ret, buff, '+', 2);
 	}
 	if (ret[accur + ft_dot(ret) + 1] > '4')
-		ret = ft_long(ret, ft_nline(-accur, "1"), '+', 1);
+		ret = ft_long(ret, ft_nline(-accur, ft_strdup("1")), '+', 2);
 	ret[accur + ft_dot(ret) + 1] = '\0';
 	return (ret);
 }

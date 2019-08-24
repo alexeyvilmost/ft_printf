@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 02:55:52 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/23 20:26:12 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/24 16:17:58 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ static char *l_base_div(char *divider, char *dividend, short accur)
 		(j > 0) ? num[11] = ft_long(num[11], num[10], '-', 2) : 0;
 		ret[i++] = j + '0';
 	}
+	j = -1;
+	while (++j < 10)
+		free(num[j]);
+	free(divider);
 	return (ret);
 }
 
@@ -62,7 +66,9 @@ char    *ft_long_div(char *first, char *second, short accur)
     char *fst = NULL;
 
 	fst = (accur) ? ft_strjoinfree(first, ft_get(accur, '0'), -1, 3) : ft_strdup(first);
-    if (!ft_dot(first) && !ft_dot(second))
+    if (ft_strequ(first, "0") || ft_strequ(second, "0"))
+    	return (ft_nline(-accur, ft_strdup("0")));
+	if (!ft_dot(first) && !ft_dot(second))
 	{
     	if (!accur)
 			return (l_base_div(fst, second, accur));

@@ -6,7 +6,7 @@
 #    By: pallspic <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 20:50:17 by pallspic          #+#    #+#              #
-#    Updated: 2019/08/10 13:57:04 by pallspic         ###   ########.fr        #
+#    Updated: 2019/08/24 12:56:39 by pallspic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,8 @@ SRC = ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
 	  ft_long_math/ft_long_diff.c \
 	  ft_long_math/ft_long_sum.c \
 	  ft_long_math/ft_long_utils.c \
-	  ft_long_math/ft_make_nline.c
+	  ft_long_math/ft_make_nline.c \
+	  ft_long_math/ft_long_mult.c
 
 OBJ = $(SRC:.c=.o)
 

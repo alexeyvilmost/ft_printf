@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 02:37:37 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/23 20:26:12 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/24 15:19:00 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,14 @@ static char	*l_base_diff(char *main, char *diff, t_llong i, t_llong j)
 	{
 		(diff[j] == '.') ? i -= (j-- * 0) + 1 : 0;
 		rest = ret[i] - diff[j] - rest;
-		if (ret[i] < diff[j] || (ret[i] == diff[i] && rest < 0))
+		if (ret[i] < diff[j] || (ret[i] == diff[j] && rest < 0))
 			rest += 20;
 		ret[i--] = rest % 10 + '0';
 		j--;
 		rest /= 10;
 	}
 	if (rest && i >= 0)
-	{
-		rest /= 10;
 		ret[i]--;
-	}
 	return (ret);
 }
 
