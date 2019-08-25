@@ -74,7 +74,7 @@ char 	*ft_put_dot(char *str, size_t where, _Bool to_free)
 		a = ft_abs(len - where);
 		ret = ft_strjoinfree(ft_strsub(buff, 0, a),
 				ft_strjoinfree(".",
-				ft_strsub(buff, a, len), -1, 3), -1, 2);
+				ft_strsub(buff, a, len - a), -1, 3), -1, 2);
 	}
 	free(buff);
 	if (to_free)

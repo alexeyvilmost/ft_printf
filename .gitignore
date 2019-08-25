@@ -3,3 +3,5 @@ main.c
 .idea/
 CMakeLists.txt
 pft/
+*.o
+libft/*.o
