@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 20:51:28 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/26 02:21:30 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/26 02:50:55 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,16 +97,21 @@ char	*pf_double_line(t_double db, int accur)
 {
 	char		*ret;
 	char		*buff;
-	t_llong		mant;
 	const short	power = db.memory.expo - B127;
 
-	mant = db.memory.mant;
-	ret = ft_long(ft_itoa(mant), ft_biline(B23 - power), '/', (accur + 1) * -1);
+	if (db.memory.mant)
+		ret = ft_long(ft_itoa(db.memory.mant),
+				ft_biline(B23 - power), '/', -accur - 1);
+	else
+		ret = ft_nline(-accur - 1, "0", 0);
 	if (power > 0)
 		ret = ft_long(ret, ft_itoa(ft_pow(2, power)), '+', 2);
 	else
 	{
-		buff = ft_long(ft_strdup("1"), ft_biline(-power), '/', power);
+		if (db.memory.expo)
+			buff = ft_long(ft_strdup("1"), ft_biline(-power), '/', power);
+		else
+			buff = ft_strdup("0.0");
 		ret = ft_long(ret, buff, '+', 2);
 	}
 	if (ret[accur + ft_dot(ret) + 1] > '4')

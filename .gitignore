@@ -1,7 +1,9 @@
 cmake-build-debug/
 main.c
 .idea/
+.DStore
 CMakeLists.txt
 pft/
 *.o
 libft/*.o
+pft/
