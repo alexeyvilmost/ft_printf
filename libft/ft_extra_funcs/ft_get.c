@@ -16,10 +16,10 @@
 ** ft_get - return NULL-terminated string with number of symbols
 */
 
-char 	*ft_get(int amount, int symbol)
+char	*ft_get(int amount, int symbol)
 {
 	char	*nulles;
-	char 	*ret;
+	char	*ret;
 
 	if (amount < 0)
 		return (ft_strnew(1));

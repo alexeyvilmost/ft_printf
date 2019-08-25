@@ -29,5 +29,5 @@ short	ft_nsize_base(t_ullong n, short base)
 
 short	ft_nsize(t_ullong n)
 {
-    return (ft_nsize_base(n, 10));
+	return (ft_nsize_base(n, 10));
 }

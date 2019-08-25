@@ -6,7 +6,7 @@
 /*   By: pallspic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 20:42:22 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/24 17:52:29 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/26 01:49:15 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef long double				t_dbl;
 */
 
 t_ullong			ft_abs(long long n);
-char 				*ft_get(int amount, int symbol);
+char				*ft_get(int amount, int symbol);
 t_llong				ft_pow(t_llong to_raise, short power);
 long double			ft_pow_dbl(long double to_raise, short power);
 t_llong				ft_max(t_llong first_num, t_llong second_num);
@@ -73,18 +73,18 @@ char				*ft_strjoinfree(char *s1, char *s2, t_llong am, char to_f);
 */
 
 size_t				ft_dot(const char *str);
-size_t				ft_after_dot(const char *str);
-char				*ft_bin_nline(int power);
-int 				ft_longcmp(const char *n1, const char *n2);
-char 				*ft_nline(int pos, char *num, _Bool to_free);
+size_t				ft_adot(const char *str);
+char				*ft_biline(int power);
+int					ft_longcmp(const char *n1, const char *n2);
+char				*ft_nline(int pos, char *num, _Bool to_free);
 char				*ft_rm_dot(char	*str, _Bool to_free);
-char 				*ft_put_dot(char *str, size_t where, _Bool to_free);
+char				*ft_put_dot(char *str, size_t where, _Bool to_free);
 
 char				*ft_long_mult(char *fst, char *snd);
 char				*ft_long_sum(char *main, char *add);
 char				*ft_long_diff(char *main, char *diff);
-char    			*ft_long_div(char *first, char *second, short accur);
-char 				*ft_long(char *f_num, char *s_num, char option, short to_f);
+char				*ft_long_div(char *first, char *second, short accur);
+char				*ft_long(char *f_num, char *s_num, char option, short to_f);
 
 /*
 ** =======================# Standard functions: #===============================

@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 21:02:31 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/23 19:19:00 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/26 01:52:31 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ t_type	pf_put_n(t_type data, va_list arg, t_llong i, t_ullong n)
 	return (pf_pre_put(data, ft_strchr(USIGN, data.spec) ? 0 : (i < 0)));
 }
 
-t_type pf_put_f(t_type data, va_list arg)
+t_type	pf_put_f(t_type data, va_list arg)
 {
-	int 		accur;
+	int			accur;
 	t_double	db;
 
 	accur = (data.accur == -1) ? 6 : data.accur;

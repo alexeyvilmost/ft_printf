@@ -21,9 +21,9 @@ char	*ft_strrev(const char *str)
 	size_t	end;
 	size_t	i;
 	char	c;
-    char    *ret;
+	char	*ret;
 
-    ret = ft_strdup(str);
+	ret = ft_strdup(str);
 	if (!str || !*str)
 		return ("");
 	i = 0;

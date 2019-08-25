@@ -29,5 +29,5 @@ t_ullong	ft_nmult_base(t_ullong to_count, short base)
 
 t_ullong	ft_nmult(t_ullong to_count)
 {
-    return (ft_nmult_base(to_count, 10));
+	return (ft_nmult_base(to_count, 10));
 }

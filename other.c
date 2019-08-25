@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 20:51:28 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/24 18:44:37 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/26 01:54:45 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,35 +38,35 @@ size_t	pf_write(int symbol, size_t amount)
 ** необходимые символы, в зависимости от представленных в data опций
 */
 
-t_type	pf_put(t_type data, t_llong size, short f)
+t_type	pf_put(t_type d, t_llong size, short f)
 {
-	f = ((int)data.len > data.accur || data.accur < 0) ? 0 :
-		(size = data.accur);
-	if ((size = data.size - size) > data.add &&
-			(!data.flag[0] || (data.flag[0] == O && data.accur != -1 && data.spec != 'f')))
-		data.printed += pf_write(' ', size - data.add);
-	if (data.sign)
-		data.printed += write(1, "-", 1);
-	else if (data.flag[1])
-		data.printed += write(1, &data.flag[1], 1);
-	if (data.flag[2] == '#' && data.spec == 'o' && ft_strcmp(data.line, "0"))
-		data.printed += write(1, "0", 1);
-	else if (data.spec == 'p')
-		data.printed += write(1, "0x", 2);
-	else if (data.flag[2] == '#' && ft_strcmp(data.line, "0") && data.line[0])
-		data.printed += write(1, data.spec == 'x' ? "0x" : "0X", 2);
-	if (size > data.add && data.flag[0] == O && (data.accur < 0 || data.spec == 'f'))
-		data.printed += pf_write(O, size - data.add);
-	data.printed += (f) ? pf_write(O, f - data.len) : 0;
-	data.printed += write(1, data.line, ft_strlen(data.line));
-	free(data.line);
-	data.printed += (size > data.add && data.flag[0] == '-') ?
-			pf_write(' ', size - data.add) : 0;
-	return (data);
+	f = ((int)d.len > d.accur || d.accur < 0) ? 0 :
+		(size = d.accur);
+	if ((size = d.size - size) > d.add &&
+			(!d.flag[0] || (d.flag[0] == O && d.accur != -1 && d.spec != 'f')))
+		d.printed += pf_write(' ', size - d.add);
+	if (d.sign)
+		d.printed += write(1, "-", 1);
+	else if (d.flag[1])
+		d.printed += write(1, &d.flag[1], 1);
+	if (d.flag[2] == '#' && d.spec == 'o' && ft_strcmp(d.line, "0"))
+		d.printed += write(1, "0", 1);
+	else if (d.spec == 'p')
+		d.printed += write(1, "0x", 2);
+	else if (d.flag[2] == '#' && ft_strcmp(d.line, "0") && d.line[0])
+		d.printed += write(1, d.spec == 'x' ? "0x" : "0X", 2);
+	if (size > d.add && d.flag[0] == O && (d.accur < 0 || d.spec == 'f'))
+		d.printed += pf_write(O, size - d.add);
+	d.printed += (f) ? pf_write(O, f - d.len) : 0;
+	d.printed += write(1, d.line, ft_strlen(d.line));
+	free(d.line);
+	d.printed += (size > d.add && d.flag[0] == '-') ?
+			pf_write(' ', size - d.add) : 0;
+	return (d);
 }
 
 /*
-** prepares data elems before calling fuction pf_put 
+** prepares data elems before calling fuction pf_put
 */
 
 t_type	pf_pre_put(t_type data, _Bool neg)
@@ -95,20 +95,18 @@ t_type	pf_pre_put(t_type data, _Bool neg)
 
 char	*pf_double_line(t_double db, int accur)
 {
-	char	*ret;
-	char	*buff;
-	t_llong expo;
-	t_llong mant;
+	char		*ret;
+	char		*buff;
+	t_llong		mant;
 	const short	power = db.memory.expo - B127;
 
-	expo = B23 - power;
 	mant = db.memory.mant;
-	ret = ft_long(ft_itoa(mant), ft_bin_nline(expo), '/', (accur + 1) * -1);
+	ret = ft_long(ft_itoa(mant), ft_biline(B23 - power), '/', (accur + 1) * -1);
 	if (power > 0)
 		ret = ft_long(ret, ft_itoa(ft_pow(2, power)), '+', 2);
 	else
 	{
-		buff = ft_long(ft_strdup("1"), ft_bin_nline(-power), '/', power);
+		buff = ft_long(ft_strdup("1"), ft_biline(-power), '/', power);
 		ret = ft_long(ret, buff, '+', 2);
 	}
 	if (ret[accur + ft_dot(ret) + 1] > '4')

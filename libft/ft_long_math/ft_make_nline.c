@@ -6,13 +6,13 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/23 19:32:22 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/24 17:53:01 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/26 00:37:40 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char 	*ft_nline(int pos, char *num, _Bool to_free)
+char	*ft_nline(int pos, char *num, _Bool to_free)
 {
 	char	*nulles;
 	char	*ret;
@@ -28,7 +28,8 @@ char 	*ft_nline(int pos, char *num, _Bool to_free)
 	else if (pos < 0)
 	{
 		if (nulles[0])
-			ret = ft_strjoinfree("0.", ft_strjoinfree(nulles, num, -1, 0), -1, 3);
+			ret = ft_strjoinfree("0.",
+					ft_strjoinfree(nulles, num, -1, 0), -1, 3);
 		else
 			ret = ft_strjoinfree("0.", num, -1, 0);
 	}
@@ -40,9 +41,9 @@ char 	*ft_nline(int pos, char *num, _Bool to_free)
 	return (ret);
 }
 
-char	*ft_bin_nline(int power)
+char	*ft_biline(int power)
 {
-	char 	*ret;
+	char	*ret;
 	short	times;
 
 	if (!power)

@@ -12,11 +12,11 @@
 
 #include "libft.h"
 
-char 		*ft_long_mult(char *fst, char *snd)
+char		*ft_long_mult(char *fst, char *snd)
 {
 	char	*ret;
-	char 	*num[9];
-	short 	i;
+	char	*num[9];
+	short	i;
 	t_llong	j;
 
 	i = 0;

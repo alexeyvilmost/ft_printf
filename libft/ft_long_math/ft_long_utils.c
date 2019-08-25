@@ -6,7 +6,7 @@
 /*   By: pallspic <pallspic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 00:11:05 by pallspic          #+#    #+#             */
-/*   Updated: 2019/08/24 19:39:14 by pallspic         ###   ########.fr       */
+/*   Updated: 2019/08/26 01:34:11 by pallspic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ size_t	ft_dot(const char *str)
 }
 
 /*
-** ft_after_dot - count symbols after dot in double nline, or 0 if there no dot
+** ft_adot - count symbols after dot in double nline, or 0 if there no dot
 */
 
-size_t	ft_after_dot(const char *str)
+size_t	ft_adot(const char *str)
 {
 	if (!ft_dot(str))
 		return (0);
@@ -42,12 +42,12 @@ size_t	ft_after_dot(const char *str)
 ** instead of string
 */
 
-int 	ft_longcmp(t_cchar n1, t_cchar n2)
+int		ft_longcmp(t_cchar n1, t_cchar n2)
 {
-	const size_t dot1 = ft_dot(n1);
-	const size_t dot2 = ft_dot(n2);
-	size_t len1;
-	size_t len2;
+	const size_t	dot1 = ft_dot(n1);
+	const size_t	dot2 = ft_dot(n2);
+	size_t			len1;
+	size_t			len2;
 
 	len1 = (dot1) ? dot1 : ft_strlen(n1);
 	len2 = (dot2) ? dot2 : ft_strlen(n2);
@@ -60,22 +60,19 @@ int 	ft_longcmp(t_cchar n1, t_cchar n2)
 ** ft_put_dot - put '.' in string and free it if needed
 */
 
-char 	*ft_put_dot(char *str, size_t where, _Bool to_free)
+char	*ft_put_dot(char *str, size_t where, _Bool to_free)
 {
-	char 	*ret = NULL;
-	char 	*buff = NULL;
-	const size_t len = ft_strlen(str);
-	size_t	a;
+	char			*ret;
+	char			*buff;
+	const size_t	len = ft_strlen(str);
+	size_t			a;
 
-	if (len)
-	{
-		buff = (len > where) ? ft_strdup(str) :
-				ft_strjoinfree(ft_get(where - len, '0'), str, -1, 1);
-		a = ft_abs(len - where);
-		ret = ft_strjoinfree(ft_strsub(buff, 0, a),
-				ft_strjoinfree(".",
-				ft_strsub(buff, a, len - a), -1, 3), -1, 2);
-	}
+	buff = (len > where) ? ft_strdup(str) :
+			ft_strjoinfree(ft_get(where - len, '0'), str, -1, 1);
+	a = ft_abs(len - where);
+	ret = ft_strjoinfree(ft_strsub(buff, 0, a),
+			ft_strjoinfree(".",
+			ft_strsub(buff, a, len - a), -1, 3), -1, 2);
 	free(buff);
 	if (to_free)
 		free(str);

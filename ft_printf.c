@@ -40,7 +40,7 @@ static t_type	pf_new_list(void)
 ** pf_type_parser
 **
 ** type fork, removing extra flags, stabilize data.size
-** calls the function according to a data.spec and handle 'p' 
+** calls the function according to a data.spec and handle 'p'
 */
 
 static size_t	pf_type_parser(t_type data, va_list arg)
