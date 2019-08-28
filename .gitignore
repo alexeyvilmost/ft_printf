@@ -6,4 +6,3 @@ CMakeLists.txt
 pft/
 *.o
 libft/*.o
-pft/
