@@ -1,6 +1,8 @@
 # ft_printf
 Recreation of standard libc printf function
 
+![](https://img.shields.io/badge/42FileChecker-100%2F100%20passed-brightgreen) ![](https://img.shields.io/badge/pft-2400%2F2409%20(9%20timeouts)-brightgreen) ![](https://img.shields.io/badge/license-MIT-green)
+
 ## General information:
 
 ft_printf is an openning project in algorithm branch, in project trees of 42ecole and 21school;
@@ -22,14 +24,6 @@ This implementation have all functions from Mandatory part, such as:
 And some extra features (mostly for ft_ls)
 * wildcard supply on size field;
 * wildcard supply on precision field;
-
-## Quality
-
-This project passed:
-* [This](https://github.com/jgigault/42FileChecker) checker (100/100, except for speed rate (*in developing*));
-* [This](https://github.com/gavinfielder/pft) checker (2400/2409, except for some timeouts(*in developing*))
-* Moulinette for 125/100;
-* 3 frendly peers for average score 123/100;
 
 ### The Hardest Thing Of Project:
 
